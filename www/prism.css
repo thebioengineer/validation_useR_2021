@@ -82,9 +82,15 @@ pre[class*="language-"] {
 .token.roxygen-comment {
   color: #86deff;
 }
+
 .token.roxygen-comment-special {
   color: indianred;
 }
+
+.token.roxygen-comment-special2 {
+  color: #ea0000;;
+}
+
 .token.testthat  {
   color: red;
 }

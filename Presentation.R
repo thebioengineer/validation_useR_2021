@@ -339,32 +339,30 @@ pres_val_run <- pres_val_rep_el %>%
   ))),
   
   panel_markdown("
-      Evaluate the report to validate package
-      
-      ```r
-      valtools::vt_validate_report()
-      valtools::vt_validate_source()
-      valtools::vt_validate_build()
-      valtools::vt_validate_install()
-      ```
-      - runs (and may temporarily install package) validation report
-      - saves output to output directory
-      - opens output report
-
+  Evaluate the report to validate package
+  
+  ```r
+  valtools::vt_validate_report()
+  valtools::vt_validate_source()
+  valtools::vt_validate_build()
+  valtools::vt_validate_install()
+  ```
+  - runs (and may temporarily install package) validation report
+  - saves output to output directory
+  - opens output report
   ", style = "font-size: 45px; margin-top: 140px;font-size: 50px"),
   
   panel_markdown("
-      Evaluate the report to validate package
-      
-      ```r
-      valtools::vt_validate_installed package
-      ```
-      - runs validation report from installed package
-      - saves output to output directory
-      - opens output report
-      
-      - Validation of package _after_ environment has changed, but package has not
-
+  Evaluate the report to validate package
+  
+  ```r
+  valtools::vt_validate_installed package
+  ```
+  - runs validation report from installed package
+  - saves output to output directory
+  - opens output report
+  
+  - Validation of package _after_ environment has changed, but package has not
   ", style = "font-size: 45px; margin-top: 140px;font-size: 50px")
 
   )
@@ -389,12 +387,7 @@ pres_final <- pres_forever %>%
    <div style = 'background-color: #ffffff;opacity: .5;border-radius: 10px;width: 1200px;padding: 20px;font-size: 60px;margin:auto;color: black;'>
     <br>
     <p style = 'margin-bottom: 0;'><i style = 'text-decoration: none;' class='fa fa-github-square'></i> github.com/thebioengineer/validation_useR_2021</p>
-    <br>
-    <p style = 'margin-bottom: 0;'> {valtools} R package </p>
     <p style = 'margin-bottom: 0;'><i style = 'text-decoration: none;' class='fa fa-github-square'></i> github.com/phuse-org/valtools</p>
-    <br>
-    <div style = 'margin:auto'>
-    <p style = 'margin-bottom: 0;'><i style = 'text-decoration: none;'  class='fa fa-twitter-square'></i> @ellis_hughes</p>
     </div>
     </div>
    </div>
