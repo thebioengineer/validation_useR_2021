@@ -1,12 +1,10 @@
 
 # install.packages(c("remotes","here"))
 # remotes::install_github("thebioengineer/sidescroller")
-# remotes::install_github("thebioengineer/openMic")
 # remotes::install_github("gadenbuie/xaringanExtra")
 library(sidescroller)
 library(here)
 library(xaringanExtra)
-library(openMic)
 
 
 pres <- sidescroller(
@@ -32,8 +30,7 @@ pres <- sidescroller(
       src = c(href = "www"),
       script = c("useR_conf_2021.js","prism.js"),
       stylesheet = c("useR_conf_2021.css","prism.css")),
-    openMic::html_dependency_open_mic(),
-    xaringanExtra::html_dependency_webcam()
+    html_dependency_webcam(width = 300, height = 300)
     ))
 
 ## Title ----
@@ -64,8 +61,6 @@ pres_bio <- pres_title %>%
       <div style = 'height:100%'>
         <div style = 'display:inline-block; vertical-align: top; padding-right:20px; font-size: 45px;margin-left: 50px;'>
         - <span style='font-weight: bold;'>Statistical Programmer</span>
-           - Statistical Genetics
-           - HIV Vaccine Research
         <br>
         - <span style='font-weight: bold;'>Community</span>
           - Seattle UseR Organizer
@@ -112,29 +107,14 @@ pres_val_elements <- pres_bio %>%
     panel_markdown("
   <h3>{valtools} R Package</h3>
 
-    - v0.3.0 available on github
-      - github.com/phuse-org/valtools
-
-    - Based on white paper
+    - v0.3.0
+    
+    - github.com/phuse-org/valtools
 
     - Provide tooling extending {usethis} & {devtools} for validation
 
   ",
       style = "font-size: 45px;margin-top: 140px;"
-    ),
-    
-    panel_markdown(
-      "
-  <h3>Advantages</h3>
-
-    - Clear & consistent organization
-
-    - No duplication of effort
-
-    - Reusable and Extensible
-
-  ",
-      style = 'font-size: 45px;margin-top:140px; '
     ),
     
     panel(div(
@@ -156,46 +136,25 @@ pres_val_init <- pres_val_elements %>%
   slide_multipanel(
     title = tags$div(style = 'width:700px', "Initializing"),
     
-    panel_markdown("
-    
-    {valtools} Validation Infrastructure
-    
-    ```
-    |__validation
-      |__validation.yml
-      |__requirements/
-      |__test_cases/
-      |__test_code/
-    ```
-    ",
-                   style = "font-size: 40px;margin:auto;padding-top: 150px"
-    ),
-    
     panel_markdown(
       "
-      Adding validation infrastructure to a Project or starting a package
+      Adding validation infrastructure to a package
 
       ```{r, eval = FALSE}
       valtools::vt_use_validation() # Existing projects/packages
       ```
       
+      - 
+      
       
       Creates package with validation infrastructure
       
       ```{r, eval = FALSE}
-      valtools::vt_create_package() # New package
+      valtools::vt_create_package(\"hello.world\")
       ```
 
       ",
       style = "font-size: 45px; margin-top: 140px;font-size: 50px"
-    ),
-    
-    panel_markdown("
-    ```{r, eval = FALSE}
-    valtools::vt_use_validation(\"hello.world\") # Existing projects/packages
-    ```
-    ",
-    style = "font-size: 45px; margin-top: 140px;font-size: 50px"
     ))
 
 ## Elements ----
@@ -213,7 +172,7 @@ pres_val_elements <- pres_val_init %>%
   - Asks for user information (if necessary)
   - Opens for editing
   - Comes with Roxygen tags pre-populated
-  
+  - 
   - analogs to usethis::use_*
       
   ", style = "font-size: 45px; margin-top: 140px;font-size: 50px")
@@ -240,30 +199,7 @@ pres_val_roxy <- pres_val_elements %>%
     
   ", style = "margin-top: 140px; font-size: 45px;"),
   
-  panel_markdown("
-  
-  Using **roxygen** tags allows documents and functions to be 
-  
-    - self-recording source of truth
-    - not reliant on external software
-
-  ", style = "margin-top: 140px; font-size: 45px;"),
-  
   panel(div(div(markdown_to_html("
-  ```{r eval=FALSE, echo = TRUE}
-  
-  #' @editor Ellis Hughes
-  #' @editDate 2025/01/01
-  #' @riskAssessment
-  #' 1.1: 1, Low Risk, Small Impact
-  #' 1.2: 5, Low risk, Medium Impact`
-  
-  ## Say Hello
-  
-    + 1.1 Say Hello to users
-    + 1.2 Say Hello to multiple users at once
-    
-  ```
   
   ```{r eval = FALSE, echo = TRUE}
   #' Hello World
@@ -282,7 +218,7 @@ pres_val_roxy <- pres_val_elements %>%
 ## Report Elements ----
 
 pres_val_rep_el <- pres_val_roxy %>% 
-  slide_multipanel(title = tags$div(style = 'width:1000px',"Report Authoring"),
+  slide_multipanel(title = tags$div(style = 'width:600px',"Report Authoring"),
   
   panel_markdown("
       
@@ -291,53 +227,16 @@ pres_val_rep_el <- pres_val_roxy %>%
   
   ```
   - Creates report file
-  - Asks for user information (if necessary)
-  - Opens for editing
   - Comes with report contents
-  
-  - analogs to usethis::use_vignette
-      
-  ", style = "font-size: 45px; margin-top: 140px;font-size: 50px"),
-                   
-  panel_markdown("
-  - {valtools} provides helper functions for scraping and generating your report
-  
-  - `vt_scrape_*` scrapes tags and content
-  - `vt_kable_*` provides an opinionated kabling format
-  
-  - `vt_path()` for path referencing
-  - `vt_file()` for file rendering
-  
-  
-  ", style = "margin-top:140px; font-size: 45px;"),
-  
-  panel(
-    tags$iframe(
-      src = "img/Validate.pdf?#zoom=140",
-      style = "width: 1200px; height: 100%",
-      frameborder="0", marginwidth="0"),
-    style = "margin-top: 50px; padding-left:200px; padding-right:200px"))
+  - {valtools} provides helper functions for scraping <br>and generating your report
+
+  ", style = "font-size: 45px; margin-top: 140px;font-size: 50px"))
 
 ## Validation ----
 
 pres_val_run <- pres_val_rep_el %>% 
   slide_multipanel(title = tags$div(style = 'width:1000px',"Validation Modes"),
-                   
-  panel(div(class = "center_content",div( style = "margin: auto; height: 130%;",
-    img(
-      src = "img/Framework.png",
-      style = "width: 1500px;height: auto; margin-top: 200px;",
-      alt = "Same image of the Framework as before, where it shows 5 steps listed sequentially - 
-            Requirements, R Package Development, Test Cases, Test Code, and Validation Report.
-            Below each step there is a description:
-            Requirements - Record the Expectations, goals, and risk of the project
-            R Package Development - Implementation of requirements into R package
-            Test Cases - Describes how code meets specifications
-            Test Code - Implementation of test cases in code
-            Validation Report - Combine all prior content into report documenting proof that code meets specifications.
-            "),
-  ))),
-  
+
   panel_markdown("
   Evaluate the report to validate package
   
@@ -346,24 +245,14 @@ pres_val_run <- pres_val_rep_el %>%
   valtools::vt_validate_source()
   valtools::vt_validate_build()
   valtools::vt_validate_install()
+  valtools::vt_validate_installed_package()
   ```
-  - runs (and may temporarily install package) validation report
-  - saves output to output directory
-  - opens output report
-  ", style = "font-size: 45px; margin-top: 140px;font-size: 50px"),
+  - -runs (and may temporarily install package) validation report
+  - -saves output to output directory
+  - -opens output report
   
-  panel_markdown("
-  Evaluate the report to validate package
-  
-  ```r
-  valtools::vt_validate_installed package
-  ```
-  - runs validation report from installed package
-  - saves output to output directory
-  - opens output report
-  
-  - Validation of package _after_ environment has changed, but package has not
   ", style = "font-size: 45px; margin-top: 140px;font-size: 50px")
+  
 
   )
 
